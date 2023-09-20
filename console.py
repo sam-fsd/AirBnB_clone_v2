@@ -145,6 +145,8 @@ class HBNBCommand(cmd.Cmd):
                         p[1] = int(p[1])
                     except ValueError:
                         p[1] = str(p[1])
+                        if '_' in p[1]:
+                            p[1] = ' '.join(p[1].split('_'))
 
                 if isinstance(p[1], HBNBCommand.types.get(p[0])):
                     setattr(new_instance, p[0], p[1])
