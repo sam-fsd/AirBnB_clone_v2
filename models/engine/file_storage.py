@@ -18,14 +18,12 @@ class FileStorage:
     def all(self, cls=None):
         """Returns a dictionary of models currently in storage"""
         if cls is not None:
-            lst = []
             dct = {}
             for key,value in FileStorage.__objects.items():
                if value["__class__"] == cls:
                    dct[key] = value
-                   lst.append(dct)
 
-            return lst
+            return dct 
         else:
             return FileStorage.__objects
 
