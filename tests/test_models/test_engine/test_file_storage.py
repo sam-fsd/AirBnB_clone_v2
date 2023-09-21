@@ -21,8 +21,8 @@ class test_fileStorage(unittest.TestCase):
         """ Remove storage file at end of tests """
         try:
             os.remove('file.json')
-        except:
-            pass
+        except Exception as e:
+            print(f'Exception: {e}')
 
     def test_obj_list_empty(self):
         """ __objects is initially empty """
@@ -107,3 +107,14 @@ class test_fileStorage(unittest.TestCase):
         from models.engine.file_storage import FileStorage
         print(type(storage))
         self.assertEqual(type(storage), FileStorage)
+
+    def test_console_create(self):
+        """Test create command with params"""
+        command = (
+            'echo "create Place city_id=\'0001\' user_id=\'0001\' name=\'My_little_house\' '
+            'number_rooms=4 number_bathrooms=2 max_guest=10 price_by_night=300 '
+            'latitude=37.773972 longitude=-122.431297" | ./console.py'
+        )
+
+        os.system(command)
+        self.assertNotEqual(os.path.getsize('file.json'), 0)

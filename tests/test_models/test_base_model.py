@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-""" """
+"""Defines test cases for basemodel """
 from models.base_model import BaseModel
 import unittest
 import datetime
@@ -9,38 +9,39 @@ import os
 
 
 class test_basemodel(unittest.TestCase):
-    """ """
+    """Tests different fields/methods of base_model """
 
     def __init__(self, *args, **kwargs):
-        """ """
+        """Calls parent class constructor """
         super().__init__(*args, **kwargs)
         self.name = 'BaseModel'
         self.value = BaseModel
 
     def setUp(self):
-        """ """
+        """Does nothin """
         pass
 
     def tearDown(self):
+        """Removes the json file after every test"""
         try:
             os.remove('file.json')
         except:
             pass
 
     def test_default(self):
-        """ """
+        """Test instance """
         i = self.value()
         self.assertEqual(type(i), self.value)
 
     def test_kwargs(self):
-        """ """
+        """Instantiation with keyworded arguments """
         i = self.value()
         copy = i.to_dict()
         new = BaseModel(**copy)
         self.assertFalse(new is i)
 
     def test_kwargs_int(self):
-        """ """
+        """Test type of key should be string """
         i = self.value()
         copy = i.to_dict()
         copy.update({1: 2})
@@ -57,41 +58,41 @@ class test_basemodel(unittest.TestCase):
             self.assertEqual(j[key], i.to_dict())
 
     def test_str(self):
-        """ """
+        """String represention of BaseModel """
         i = self.value()
         self.assertEqual(str(i), '[{}] ({}) {}'.format(self.name, i.id,
                          i.__dict__))
 
     def test_todict(self):
-        """ """
+        """Test dictionary conversion of an instance """
         i = self.value()
         n = i.to_dict()
         self.assertEqual(i.to_dict(), n)
 
     def test_kwargs_none(self):
-        """ """
+        """Test empty kwargs """
         n = {None: None}
         with self.assertRaises(TypeError):
             new = self.value(**n)
 
     def test_kwargs_one(self):
-        """ """
+        """Test with one keyworded argument"""
         n = {'Name': 'test'}
         with self.assertRaises(KeyError):
             new = self.value(**n)
 
     def test_id(self):
-        """ """
+        """Check tyoe iid attribute """
         new = self.value()
         self.assertEqual(type(new.id), str)
 
     def test_created_at(self):
-        """ """
+        """Test type of created_at attribute """
         new = self.value()
         self.assertEqual(type(new.created_at), datetime.datetime)
 
     def test_updated_at(self):
-        """ """
+        """Test updated at attribute """
         new = self.value()
         self.assertEqual(type(new.updated_at), datetime.datetime)
         n = new.to_dict()
