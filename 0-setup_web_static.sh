@@ -9,7 +9,15 @@ sudo mkdir -p /data/web_static/shared/
 sudo mkdir -p /data/web_static/releases/test/
 sudo touch /data/web_static/releases/test/index.html
 sudo chmod go+w /data/web_static/releases/test/index.html
-echo "Holberton School" | sudo tee /data/web_static/releases/test/index.html > /dev/null
+
+html="<html>
+  <head>
+  </head>
+  <body>
+    Holberton School
+  </body>
+</html>"
+echo "$html" | sudo tee /data/web_static/releases/test/index.html > /dev/null
 
 dest_link="/data/web_static/current"
 
@@ -28,7 +36,7 @@ config="server {
     index index.html;
 
     add_header X-Served-By \$hostname;
-    location /hbtn_static {
+    location /hbnb_static {
         alias /data/web_static/current/;
         index index.html index.htm;
     }
