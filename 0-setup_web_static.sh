@@ -9,7 +9,7 @@ sudo mkdir -p /data/web_static/shared/
 sudo mkdir -p /data/web_static/releases/test/
 sudo touch /data/web_static/releases/test/index.html
 sudo chmod go+w /data/web_static/releases/test/index.html
-sudo echo "test message" > /data/web_static/releases/test/index.html
+echo "Holberton School" | sudo tee /data/web_static/releases/test/index.html > /dev/null
 
 dest_link="/data/web_static/current"
 
@@ -42,6 +42,6 @@ config="server {
     }
 }"
 
-sudo echo "$config" > /etc/nginx/sites-available/default;
+echo "$config" | sudo tee /etc/nginx/sites-available/default > /dev/null;
 
 sudo service nginx restart;
