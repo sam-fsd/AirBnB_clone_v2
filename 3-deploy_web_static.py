@@ -10,6 +10,7 @@ do_deploy = __import__('2-do_deploy_web_static').do_deploy
 env.user = 'ubuntu'
 env.hosts = ['34.203.75.238', '100.26.226.192']
 
+
 def deploy():
     """Creates and distributes an archive to web servers"""
     archive_path = do_pack()
