@@ -15,7 +15,7 @@ app = Flask(__name__)
 @app.route("/c/<text>", strict_slashes=False)
 def c_route(text):
     """Renders text
-    
+
     Returns:
         String to page
     """
