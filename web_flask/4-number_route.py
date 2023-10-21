@@ -58,7 +58,6 @@ def python_route(text='is cool'):
     return f'Python {escape(text)}'
 
 
-
 @app.route("/number/<int:n>")
 def number_route(n):
     """Display number only if n is an integer"""
